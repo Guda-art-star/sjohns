@@ -1,0 +1,6 @@
+{
+  "name": "St. John's College Mpigi",
+  "description": "Official website of St. John's College Mpigi, Uganda. Shaping Tomorrow's Leaders Today, emphasizing academic excellence, discipline, and holistic development.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
