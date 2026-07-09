@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { MessageSquare, Send, X, ShieldAlert } from "lucide-react";
+import { useLanguage } from "../LanguageContext";
 
 export default function WhatsAppButton() {
+  const { t } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState("");
   const [chatHistory, setChatHistory] = useState<
@@ -72,13 +74,13 @@ export default function WhatsAppButton() {
                   <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-400 border-2 border-emerald-800 rounded-full"></span>
                 </div>
                 <div>
-                  <h4 className="font-semibold text-xs leading-none">St. John's College Help Desk</h4>
-                  <p className="text-[10px] text-emerald-200 mt-1">Online • Typically replies in 1 min</p>
+                  <h4 className="font-semibold text-xs leading-none">{t("St. John's College Help Desk")}</h4>
+                  <p className="text-[10px] text-emerald-200 mt-1">{t("Online • Typically replies in 1 min")}</p>
                 </div>
               </div>
               <button
                 onClick={() => setIsOpen(false)}
-                className="p-1 rounded-full hover:bg-emerald-700/60 transition-colors text-emerald-100 hover:text-white"
+                className="p-1 rounded-full hover:bg-emerald-700/60 transition-colors text-emerald-100 hover:text-white cursor-pointer"
                 id="close-whatsapp"
               >
                 <X className="h-4.5 w-4.5" />
@@ -96,13 +98,13 @@ export default function WhatsAppButton() {
                       : "bg-white text-slate-700 rounded-tl-none self-start shadow-xs border border-slate-100"
                   }`}
                 >
-                  <p>{item.text}</p>
+                  <p>{t(item.text)}</p>
                   <span
                     className={`block text-[9px] mt-1 text-right ${
                       item.sender === "user" ? "text-emerald-200" : "text-slate-400 font-medium"
                     }`}
                   >
-                    {item.time}
+                    {t(item.time)}
                   </span>
                 </div>
               ))}
@@ -112,14 +114,14 @@ export default function WhatsAppButton() {
             <form onSubmit={handleSendMessage} className="p-3 border-t border-slate-100 bg-white flex gap-2">
               <input
                 type="text"
-                placeholder="Type your message..."
+                placeholder={t("Type your message...")}
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 className="flex-1 px-3 py-1.5 border border-slate-200 rounded-full text-xs focus:outline-none focus:ring-1 focus:ring-emerald-700"
               />
               <button
                 type="submit"
-                className="p-2 bg-emerald-800 hover:bg-emerald-950 text-white rounded-full transition-colors shrink-0 shadow-sm"
+                className="p-2 bg-emerald-800 hover:bg-emerald-950 text-white rounded-full transition-colors shrink-0 shadow-sm cursor-pointer"
               >
                 <Send className="h-3.5 w-3.5" />
               </button>
@@ -141,7 +143,7 @@ export default function WhatsAppButton() {
           <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-400"></span>
         </span>
         <MessageSquare className="h-4.5 w-4.5" />
-        <span>Chat With Us</span>
+        <span>{t("Chat With Us")}</span>
       </motion.button>
     </div>
   );

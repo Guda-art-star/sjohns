@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}St. John's College - Frequently Asked Questions{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            
+            <div class="text-center mb-5">
+                <i class="bi bi-patch-question text-sky-custom display-4"></i>
+                <h1 class="display-6 mt-2 mb-2 font-serif text-sky-950">Frequently Asked Questions</h1>
+                <p class="lead text-muted small text-xs max-w-xl mx-auto">
+                    Quickly find answers to admission schedules, boarding circulars, and escrow fee payments in SJC's registry.
+                </p>
+            </div>
+
+            {% if categorized_faqs %}
+                {% for category, faqs in categorized_faqs.items %}
+                    <div class="mb-5">
+                        <h4 class="text-sky-custom border-bottom pb-2 mb-3"><i class="bi bi-tag-fill"></i> {{ category }}</h4>
+                        
+                        <div class="accordion border-0 shadow-xs rounded-4 overflow-hidden" id="accordion{{ forloop.counter }}">
+                            {% for faq in faqs %}
+                                <div class="accordion-item border-light-subtle">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button {% if not forloop.first %}collapsed{% endif %} py-3 text-sky-950 font-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFaq{{ faq.id }}" aria-expanded="{% if forloop.first %}true{% endif %}" style="font-size: 13px;">
+                                            {{ faq.question }}
+                                        </button>
+                                    </h2>
+                                    <div id="collapseFaq{{ faq.id }}" class="accordion-collapse collapse {% if forloop.first %}show{% endif %}" data-bs-parent="#accordion{{ forloop.parentloop.counter }}">
+                                        <div class="accordion-body text-muted leading-relaxed small" style="font-size: 12px; background-color: #fafbfc;">
+                                            {{ faq.answer|linebreaks }}
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="text-center p-5 bg-white border rounded-4 text-muted small">
+                    <i class="bi bi-question-circle-fill fs-2 text-slate-300"></i>
+                    <p class="mt-2">No Frequently Asked Questions are published in SJC SQLite tables yet.</p>
+                </div>
+            {% endif %}
+
+        </div>
+    </div>
+
+</div>
+{% endblock %}

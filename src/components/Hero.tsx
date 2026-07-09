@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { ChevronLeft, ChevronRight, ArrowRight, ShieldCheck } from "lucide-react";
+import { useLanguage } from "../LanguageContext";
 
 // Images
 import heroBanner from "../assets/images/students_hero_banner_1782462430116.jpg";
@@ -9,30 +10,30 @@ import studentsGirlsAdmin from "../assets/images/students_girls_admin_stjohns_17
 
 interface HeroProps {
   onOpenAdmission: () => void;
-  onOpenPortal: () => void;
   onScrollToAbout: () => void;
 }
 
-export default function Hero({ onOpenAdmission, onOpenPortal, onScrollToAbout }: HeroProps) {
+export default function Hero({ onOpenAdmission, onScrollToAbout }: HeroProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const { t } = useLanguage();
 
   const slides = [
     {
-      title: "Shaping Tomorrow's Leaders Today",
-      sub: "Excellence in academics, discipline, and character building.",
-      label: "ST. JOHN'S COLLEGE MPIGI",
+      title: t("Shaping Tomorrow's Leaders Today"),
+      sub: t("Excellence in academics, discipline, and character building."),
+      label: t("ST. JOHN'S COLLEGE MPIGI"),
       image: studentsMixedAdmin,
     },
     {
-      title: "Godliness and Hardwork Since 2004",
-      sub: "Providing high-standard secondary education that empowers children to excel globally.",
-      label: "ACADEMIC DISTINCTION",
+      title: t("Godliness and Hardwork Since 2004"),
+      sub: t("Providing high-standard secondary education that empowers children to excel globally."),
+      label: t("ACADEMIC DISTINCTION"),
       image: heroBanner,
     },
     {
-      title: "Holistic Student Development",
-      sub: "Nurturing talents in sports, debate, drama, and technology-driven programs.",
-      label: "CHARACTER & INTEGRITY",
+      title: t("Holistic Student Development"),
+      sub: t("Nurturing talents in sports, debate, drama, and technology-driven programs."),
+      label: t("CHARACTER & INTEGRITY"),
       image: studentsGirlsAdmin,
     }
   ];
@@ -119,14 +120,14 @@ export default function Hero({ onOpenAdmission, onOpenPortal, onScrollToAbout }:
                 onClick={onScrollToAbout}
                 className="px-6 py-3.5 bg-sky-500 hover:bg-sky-600 text-white text-xs md:text-sm font-bold rounded-lg shadow-lg flex items-center gap-2 group transition-all uppercase tracking-wider cursor-pointer"
               >
-                <span>Discover More</span>
+                <span>{t("Discover More")}</span>
                 <ArrowRight className="h-4 w-4 group-hover:translate-x-1.5 transition-transform" />
               </button>
               <button
                 onClick={onOpenAdmission}
                 className="px-6 py-3.5 border-2 border-white hover:bg-white hover:text-slate-900 text-white text-xs md:text-sm font-bold rounded-lg transition-all uppercase tracking-wider cursor-pointer"
               >
-                Apply Now
+                {t("Apply Now")}
               </button>
             </div>
           </motion.div>

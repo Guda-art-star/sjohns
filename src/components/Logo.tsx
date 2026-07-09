@@ -1,4 +1,5 @@
 import React from "react";
+import { useLanguage } from "../LanguageContext";
 
 interface LogoProps {
   className?: string;
@@ -13,6 +14,7 @@ export default function Logo({
   variant = "dark",
   showText = true,
 }: LogoProps) {
+  const { t } = useLanguage();
   const sizeMap = {
     sm: "h-11 w-11",
     md: "h-16 w-16",
@@ -262,7 +264,7 @@ export default function Logo({
             ST. JOHN'S COLLEGE MPIGI
           </span>
           <span className={`text-[10px] font-bold tracking-widest uppercase mt-1 italic ${subColorClass}`}>
-            Godliness & Hardwork
+            {t("Godliness & Hardwork")}
           </span>
         </div>
       )}

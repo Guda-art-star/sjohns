@@ -1,18 +1,21 @@
 import React, { useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import KeyPillars from "./components/KeyPillars";
 import AboutSection from "./components/AboutSection";
 import GallerySection from "./components/GallerySection";
 import GridSection from "./components/GridSection";
+import AlumniSection from "./components/AlumniSection";
+import FAQSection from "./components/FAQSection";
 import Footer from "./components/Footer";
 import AdmissionModal from "./components/AdmissionModal";
-import StudentPortalModal from "./components/StudentPortalModal";
 import WhatsAppButton from "./components/WhatsAppButton";
+import Preloader from "./components/Preloader";
 
 export default function App() {
   const [admissionModalOpen, setAdmissionModalOpen] = useState(false);
-  const [portalModalOpen, setPortalModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleNavClick = (sectionId: string) => {
     const el = document.getElementById(sectionId);
@@ -26,62 +29,73 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col font-sans" id="main-application-viewport">
-      {/* Navigation Header */}
-      <Navbar 
-        onOpenAdmission={() => setAdmissionModalOpen(true)}
-        onOpenPortal={() => setPortalModalOpen(true)}
-        onNavClick={handleNavClick}
-      />
+    <>
+      <AnimatePresence mode="wait">
+        {isLoading ? (
+          <Preloader key="preloader" onComplete={() => setIsLoading(false)} />
+        ) : (
+          <motion.div
+            key="main-content"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="min-h-screen bg-slate-50 flex flex-col font-sans"
+            id="main-application-viewport"
+          >
+            {/* Navigation Header */}
+            <Navbar 
+              onOpenAdmission={() => setAdmissionModalOpen(true)}
+              onNavClick={handleNavClick}
+            />
 
-      {/* Main Sections */}
-      <main className="flex-grow">
-        {/* Hero Section Banner */}
-        <Hero 
-          onOpenAdmission={() => setAdmissionModalOpen(true)}
-          onOpenPortal={() => setPortalModalOpen(true)}
-          onScrollToAbout={handleScrollToAbout}
-        />
+            {/* Main Sections */}
+            <main className="flex-grow">
+              {/* Hero Section Banner */}
+              <Hero 
+                onOpenAdmission={() => setAdmissionModalOpen(true)}
+                onScrollToAbout={handleScrollToAbout}
+              />
 
-        {/* Floating Key Pillars cards */}
-        <KeyPillars />
+              {/* Floating Key Pillars cards */}
+              <KeyPillars />
 
-        {/* Detailed About section with stats and full profile */}
-        <AboutSection 
-          onOpenAdmission={() => setAdmissionModalOpen(true)}
-        />
+              {/* Detailed About section with stats and full profile */}
+              <AboutSection 
+                onOpenAdmission={() => setAdmissionModalOpen(true)}
+              />
 
-        {/* Gallery tour section */}
-        <GallerySection />
+              {/* Gallery tour section */}
+              <GallerySection />
 
-        {/* 4-column Announcements / Events / QuickLinks / StudentPortal Section */}
-        <GridSection 
-          onOpenPortal={() => setPortalModalOpen(true)}
-          onOpenAdmission={() => setAdmissionModalOpen(true)}
-        />
-      </main>
+              {/* 3-column Announcements / Events / QuickLinks Section */}
+              <GridSection 
+                onOpenAdmission={() => setAdmissionModalOpen(true)}
+              />
 
-      {/* Footer Sitemap and Contacts */}
-      <Footer 
-        onNavClick={handleNavClick}
-        onOpenAdmission={() => setAdmissionModalOpen(true)}
-        onOpenPortal={() => setPortalModalOpen(true)}
-      />
+              {/* Dynamic Alumni Association section with interactive Registry & Memories Board */}
+              <AlumniSection />
 
-      {/* Floating interactive WhatsApp Chat Desk */}
-      <WhatsAppButton />
+              {/* Interactive FAQ Accordion Section */}
+              <FAQSection />
+            </main>
 
-      {/* Online Admission Application Modal Portal */}
-      <AdmissionModal 
-        isOpen={admissionModalOpen} 
-        onClose={() => setAdmissionModalOpen(false)} 
-      />
+            {/* Footer Sitemap and Contacts */}
+            <Footer 
+              onNavClick={handleNavClick}
+              onOpenAdmission={() => setAdmissionModalOpen(true)}
+            />
 
-      {/* Student Portal Dashboard Access Modal */}
-      <StudentPortalModal 
-        isOpen={portalModalOpen} 
-        onClose={() => setPortalModalOpen(false)} 
-      />
-    </div>
+            {/* Floating interactive WhatsApp Chat Desk */}
+            <WhatsAppButton />
+
+            {/* Online Admission Application Modal Portal */}
+            <AdmissionModal 
+              isOpen={admissionModalOpen} 
+              onClose={() => setAdmissionModalOpen(false)} 
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }

@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}SJC Mpigi - Online Admission Registration{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            
+            <!-- Breadcrumbs -->
+            <div class="p-4 bg-sky-950 text-white rounded-4 shadow-sm mb-5 d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
+                <div>
+                    <h2 class="h3 mb-1"><i class="bi bi-file-earmark-check-fill text-warning"></i> SJC Online Admission</h2>
+                    <p class="mb-0 text-white-50 text-xs small">Molding competent and spiritually sound leaders under Godliness & Hardwork.</p>
+                </div>
+                <div class="text-md-end">
+                    <span class="badge bg-warning text-dark px-3 py-2 uppercase font-extrabold" style="font-size: 11px;">
+                        Application Fee: 50,000 UGX
+                    </span>
+                </div>
+            </div>
+
+            <!-- Form Body -->
+            <div class="bg-white rounded-4 border p-4 p-md-5 shadow-xs">
+                
+                <h3 class="mb-4 text-sky-950 border-bottom pb-2">Student & Parent Registration Form</h3>
+                
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_data %}
+                    {% csrf_token %}
+                    
+                    <div class="row g-4">
+                        <!-- Demographics Panel -->
+                        <div class="col-md-6">
+                            <h5 class="text-sky-custom mb-3"><i class="bi bi-person-fill"></i> Student Demographic Data</h5>
+                            {{ form.first_name|as_crispy_field }}
+                            {{ form.last_name|as_crispy_field }}
+                            {{ form.date_of_birth|as_crispy_field }}
+                            {{ form.gender|as_crispy_field }}
+                        </div>
+
+                        <!-- School details -->
+                        <div class="col-md-6">
+                            <h5 class="text-sky-custom mb-3"><i class="bi bi-mortarboard-fill"></i> Enrollment Targets</h5>
+                            {{ form.class_applied|as_crispy_field }}
+                            {{ form.previous_school|as_crispy_field }}
+                            <div class="mt-4 p-3 bg-light rounded-3 border">
+                                <span class="font-bold text-dark text-xs block mb-1">ℹ️ Entry Grade Guidelines:</span>
+                                <ul class="text-xs text-muted mb-0 ps-3">
+                                    <li>Provide PLE Aggregate (Best 4 score) for Senior 1 applicants.</li>
+                                    <li>Provide UCE Division / Grade for Senior 5/6 A-level applicants.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <hr class="my-4 text-slate-200">
+
+                        <!-- Parent/Guardian Details -->
+                        <div class="col-md-12">
+                            <h5 class="text-sky-custom mb-3"><i class="bi bi-telephone-outbound-fill"></i> Parent / Guardian Contact Details</h5>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    {{ form.parent_name|as_crispy_field }}
+                                    {{ form.parent_phone|as_crispy_field }}
+                                </div>
+                                <div class="col-md-6">
+                                    {{ form.parent_email|as_crispy_field }}
+                                    {{ form.parent_address|as_crispy_field }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr class="my-4 text-slate-200">
+
+                        <!-- Document and File attachments -->
+                        <div class="col-md-6">
+                            <h5 class="text-sky-custom mb-3"><i class="bi bi-file-earmark-arrow-up-fill"></i> Upload Academic Records</h5>
+                            {{ form.ple_aggregates|as_crispy_field }}
+                            {{ form.uce_division|as_crispy_field }}
+                            {{ form.result_slip_file|as_crispy_field }}
+                            {{ form.recommendation_file|as_crispy_field }}
+                        </div>
+
+                        <!-- Escrow Payment parameters -->
+                        <div class="col-md-6">
+                            <h5 class="text-sky-custom mb-3"><i class="bi bi-wallet2"></i> Admission Escrow Payment</h5>
+                            <p class="text-xs text-muted leading-relaxed">
+                                A non-refundable application handling fee of <strong>50,000 UGX</strong> is required. Select your preferred gateway below. A unique reference number will be generated for your registration.
+                            </p>
+                            {{ form.payment_method|as_crispy_field }}
+                            {{ form.payment_phone|as_crispy_field }}
+                            
+                            <div class="alert alert-warning-subtle text-warning-emphasis text-xs d-flex align-items-start gap-2 rounded-3 border-warning mt-3">
+                                <i class="bi bi-info-circle-fill fs-5 mt-0.5"></i>
+                                <div>
+                                    Once you submit this form, you will be redirected to the secure portal checkout to approve the fee transaction instantly.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-5">
+                        <button type="submit" class="btn btn-sky-custom btn-lg px-5 py-3 rounded-3 text-uppercase shadow-md" style="font-size: 13px; font-weight: 800; letter-spacing: 0.5px;">
+                            Review & Create Payment Account <i class="bi bi-arrow-right-short"></i>
+                        </button>
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+{% endblock %}

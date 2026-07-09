@@ -4,14 +4,15 @@ import {
   Send, CheckCircle, MessageSquare 
 } from "lucide-react";
 import Logo from "./Logo";
+import { useLanguage } from "../LanguageContext";
 
 interface FooterProps {
   onNavClick: (section: string) => void;
   onOpenAdmission: () => void;
-  onOpenPortal: () => void;
 }
 
-export default function Footer({ onNavClick, onOpenAdmission, onOpenPortal }: FooterProps) {
+export default function Footer({ onNavClick, onOpenAdmission }: FooterProps) {
+  const { t } = useLanguage();
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
 
@@ -35,7 +36,7 @@ export default function Footer({ onNavClick, onOpenAdmission, onOpenPortal }: Fo
           <div className="sm:col-span-2 space-y-4">
             <Logo variant="light" size="md" showText={true} className="text-white" />
             <p className="text-xs text-emerald-100/70 leading-relaxed font-medium">
-              St. John's College Mpigi is dedicated to nurturing disciplined, innovative, and responsible leaders of tomorrow. Excellence and hard work guide our steps.
+              {t("St. John's College Mpigi is dedicated to nurturing disciplined, innovative, and responsible leaders of tomorrow. Excellence and hard work guide our steps.")}
             </p>
             {/* Social Links */}
             <div className="flex items-center gap-3.5 pt-2">
@@ -57,39 +58,40 @@ export default function Footer({ onNavClick, onOpenAdmission, onOpenPortal }: Fo
           {/* Col 2: About Us Nav */}
           <div className="space-y-4">
             <h4 className="font-serif text-xs font-bold text-white uppercase tracking-wider border-b border-emerald-800 pb-1.5">
-              About Us
+              {t("About Us")}
             </h4>
             <ul className="space-y-2 text-xs font-medium">
-              <li><a href="#about" onClick={() => onNavClick("about")} className="hover:text-white transition-colors">Our History</a></li>
-              <li><a href="#about" onClick={() => onNavClick("about")} className="hover:text-white transition-colors">Mission & Vision</a></li>
-              <li><a href="#about" onClick={() => onNavClick("about")} className="hover:text-white transition-colors">School Management</a></li>
-              <li><a href="#about" onClick={() => onNavClick("about")} className="hover:text-white transition-colors">Why Choose Us</a></li>
+              <li><a href="#about" onClick={() => onNavClick("about")} className="hover:text-white transition-colors">{t("Our History")}</a></li>
+              <li><a href="#about" onClick={() => onNavClick("about")} className="hover:text-white transition-colors">{t("Mission & Vision")}</a></li>
+              <li><a href="#about" onClick={() => onNavClick("about")} className="hover:text-white transition-colors">{t("School Management")}</a></li>
+              <li><a href="#about" onClick={() => onNavClick("about")} className="hover:text-white transition-colors">{t("Why Choose Us")}</a></li>
+              <li><a href="#faq-section" onClick={() => onNavClick("faq-section")} className="hover:text-emerald-300 font-semibold text-sky-400 transition-colors">{t("Parent FAQs")}</a></li>
             </ul>
           </div>
 
           {/* Col 3: Academics Nav */}
           <div className="space-y-4">
             <h4 className="font-serif text-xs font-bold text-white uppercase tracking-wider border-b border-emerald-800 pb-1.5">
-              Academics
+              {t("Academics")}
             </h4>
             <ul className="space-y-2 text-xs font-medium">
-              <li><a href="#about" onClick={() => onNavClick("about")} className="hover:text-white transition-colors">Departments</a></li>
-              <li><a href="#about" onClick={() => onNavClick("about")} className="hover:text-white transition-colors">Curriculum</a></li>
-              <li><a href="#about" onClick={() => onNavClick("about")} className="hover:text-white transition-colors">Library Hub</a></li>
-              <li><a href="#grid-dashboard" onClick={() => onNavClick("grid-dashboard")} className="hover:text-white transition-colors">Exam Results</a></li>
+              <li><a href="#about" onClick={() => onNavClick("about")} className="hover:text-white transition-colors">{t("Departments")}</a></li>
+              <li><a href="#about" onClick={() => onNavClick("about")} className="hover:text-white transition-colors">{t("Curriculum")}</a></li>
+              <li><a href="#about" onClick={() => onNavClick("about")} className="hover:text-white transition-colors">{t("Library Hub")}</a></li>
+              <li><a href="#grid-dashboard" onClick={() => onNavClick("grid-dashboard")} className="hover:text-white transition-colors">{t("Exam Results")}</a></li>
             </ul>
           </div>
 
           {/* Col 4: Life At St. John's Nav */}
           <div className="space-y-4">
             <h4 className="font-serif text-xs font-bold text-white uppercase tracking-wider border-b border-emerald-800 pb-1.5">
-              Life At St. John's
+              {t("Life At St. John's")}
             </h4>
             <ul className="space-y-2 text-xs font-medium">
-              <li><a href="#about" onClick={() => onNavClick("about")} className="hover:text-white transition-colors">Clubs & Societies</a></li>
-              <li><a href="#about" onClick={() => onNavClick("about")} className="hover:text-white transition-colors">Sports Grounds</a></li>
-              <li><a href="#about" onClick={() => onNavClick("about")} className="hover:text-white transition-colors">Guidance & Care</a></li>
-              <li><a href="#about" onClick={() => onNavClick("about")} className="hover:text-white transition-colors">Health Services</a></li>
+              <li><a href="#about" onClick={() => onNavClick("about")} className="hover:text-white transition-colors">{t("Clubs & Societies")}</a></li>
+              <li><a href="#about" onClick={() => onNavClick("about")} className="hover:text-white transition-colors">{t("Sports Grounds")}</a></li>
+              <li><a href="#about" onClick={() => onNavClick("about")} className="hover:text-white transition-colors">{t("Guidance & Care")}</a></li>
+              <li><a href="#about" onClick={() => onNavClick("about")} className="hover:text-white transition-colors">{t("Health Services")}</a></li>
             </ul>
           </div>
 
@@ -97,12 +99,12 @@ export default function Footer({ onNavClick, onOpenAdmission, onOpenPortal }: Fo
           <div className="space-y-4 sm:col-span-1 md:col-span-2 lg:col-span-1 flex flex-col justify-between">
             <div className="space-y-3">
               <h4 className="font-serif text-xs font-bold text-white uppercase tracking-wider border-b border-emerald-800 pb-1.5">
-                Contact Us
+                {t("Contact Us")}
               </h4>
               <ul className="space-y-3 text-xs font-medium">
                 <li className="flex items-start gap-2">
                   <MapPin className="h-4 w-4 text-emerald-400 shrink-0 mt-0.5" />
-                  <span className="text-emerald-100/80">Mpigi Town, Central Region, Uganda</span>
+                  <span className="text-emerald-100/80">{t("Mpigi Town, Central Region, Uganda")}</span>
                 </li>
                 <li className="flex items-center gap-2">
                   <Phone className="h-4 w-4 text-emerald-400 shrink-0" />
@@ -123,18 +125,18 @@ export default function Footer({ onNavClick, onOpenAdmission, onOpenPortal }: Fo
           {/* Newsletter Box */}
           <div className="w-full md:max-w-md space-y-2">
             <h4 className="font-serif text-xs font-bold text-white uppercase tracking-wider">
-              Subscribe to Newsletter
+              {t("Subscribe to Newsletter")}
             </h4>
             {subscribed ? (
               <div className="p-2.5 bg-emerald-800/40 border border-emerald-500 rounded-lg text-xs flex items-center gap-2 text-white font-semibold">
                 <CheckCircle className="h-4 w-4 text-emerald-300" />
-                <span>Subscribed! Check your inbox for updates.</span>
+                <span>{t("Subscribed! Check your inbox for updates.")}</span>
               </div>
             ) : (
               <form onSubmit={handleSubscribe} className="flex gap-2 w-full max-w-sm">
                 <input
                   type="email"
-                  placeholder="Enter your email address"
+                  placeholder={t("Enter your email address")}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
@@ -145,7 +147,7 @@ export default function Footer({ onNavClick, onOpenAdmission, onOpenPortal }: Fo
                   className="px-4 py-1.5 bg-white text-emerald-900 font-bold text-xs rounded-lg uppercase tracking-wider hover:bg-emerald-50 transition-colors cursor-pointer"
                   id="newsletter-subscribe"
                 >
-                  Subscribe
+                  {t("Subscribe")}
                 </button>
               </form>
             )}
@@ -154,11 +156,11 @@ export default function Footer({ onNavClick, onOpenAdmission, onOpenPortal }: Fo
           {/* Legal and copy */}
           <div className="flex flex-col items-center md:items-end gap-2 text-center md:text-right">
             <span className="text-[11px] text-emerald-200/50">
-              © {new Date().getFullYear()} St. John's College Mpigi. All Rights Reserved.
+              © {new Date().getFullYear()} {t("St. John's College Mpigi. All Rights Reserved.")}
             </span>
             <div className="flex gap-4 text-[10px] text-emerald-200/60 font-semibold uppercase tracking-wider">
-              <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-              <a href="#" className="hover:text-white transition-colors">Terms & Conditions</a>
+              <a href="#" className="hover:text-white transition-colors">{t("Privacy Policy")}</a>
+              <a href="#" className="hover:text-white transition-colors">{t("Terms & Conditions")}</a>
             </div>
           </div>
         </div>

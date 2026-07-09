@@ -4,6 +4,7 @@ import {
   Camera, Eye, X, ChevronLeft, ChevronRight, 
   Sparkles, Layers, BookOpen, Trophy, School 
 } from "lucide-react";
+import { useLanguage } from "../LanguageContext";
 
 // Import all local images
 import gateEntrance from "../assets/images/school_gate_entrance_1782462446101.jpg";
@@ -100,6 +101,7 @@ const CATEGORIES = [
 ];
 
 export default function GallerySection() {
+  const { t } = useLanguage();
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
@@ -133,13 +135,13 @@ export default function GallerySection() {
         <div className="text-center max-w-2xl mx-auto space-y-3 mb-12">
           <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-100 text-emerald-800 text-xs font-black tracking-widest rounded-full uppercase">
             <Camera className="h-3.5 w-3.5" />
-            <span>Campus Gallery</span>
+            <span>{t("Campus Gallery")}</span>
           </span>
           <h2 className="font-serif text-3xl md:text-4xl font-black text-slate-900 tracking-tight leading-tight">
-            Take a Visual Tour of Our Campus
+            {t("Take a Visual Tour of Our Campus")}
           </h2>
           <p className="text-xs md:text-sm text-slate-600 leading-relaxed font-medium">
-            Explore St. John's College Mpigi through photography. Glimpse our exceptional facilities, rich student learning sessions, and vibrant extracurricular pursuits.
+            {t("Explore St. John's College Mpigi through photography. Glimpse our exceptional facilities, rich student learning sessions, and vibrant extracurricular pursuits.")}
           </p>
         </div>
 
@@ -159,7 +161,7 @@ export default function GallerySection() {
                 }`}
               >
                 <Icon className={`h-3.5 w-3.5 ${isActive ? "text-white" : "text-slate-400"}`} />
-                <span>{cat.label}</span>
+                <span>{t(cat.label)}</span>
               </button>
             );
           })}
@@ -189,7 +191,7 @@ export default function GallerySection() {
                   <div className="aspect-4/3 overflow-hidden relative bg-slate-900 cursor-pointer">
                     <img
                       src={item.src}
-                      alt={item.title}
+                      alt={t(item.title)}
                       className="w-full h-full object-cover transform scale-100 group-hover:scale-105 transition-transform duration-700 opacity-95 group-hover:opacity-100"
                       referrerPolicy="no-referrer"
                     />
@@ -203,7 +205,7 @@ export default function GallerySection() {
 
                     {/* Category pill on image corner */}
                     <span className="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md text-emerald-400 border border-emerald-500/10 text-[9px] font-black tracking-widest uppercase px-2.5 py-1 rounded-md shadow-sm">
-                      {item.categoryLabel}
+                      {t(item.categoryLabel)}
                     </span>
                   </div>
 
@@ -211,15 +213,15 @@ export default function GallerySection() {
                   <div className="p-5 flex-grow flex flex-col justify-between space-y-2">
                     <div className="space-y-1">
                       <h3 className="font-serif text-base font-black text-slate-900 group-hover:text-emerald-800 transition-colors line-clamp-1">
-                        {item.title}
+                        {t(item.title)}
                       </h3>
                       <p className="text-[11px] font-medium text-slate-500 leading-relaxed line-clamp-2">
-                        {item.description}
+                        {t(item.description)}
                       </p>
                     </div>
                     
                     <button className="text-[10px] font-black text-emerald-800 group-hover:text-emerald-900 flex items-center gap-1 uppercase tracking-widest pt-2 mt-auto">
-                      <span>View Larger</span>
+                      <span>{t("View Larger")}</span>
                       <Sparkles className="h-3 w-3" />
                     </button>
                   </div>
@@ -241,10 +243,10 @@ export default function GallerySection() {
               <div className="w-full flex items-center justify-between text-white pb-4">
                 <div className="space-y-0.5">
                   <span className="text-[9px] font-black text-emerald-400 tracking-widest uppercase">
-                    St. John's College Mpigi
+                    {t("St. John's College Mpigi")}
                   </span>
                   <p className="font-serif text-sm md:text-base font-bold text-white">
-                    {filteredItems[lightboxIndex].title}
+                    {t(filteredItems[lightboxIndex].title)}
                   </p>
                 </div>
                 
@@ -278,7 +280,7 @@ export default function GallerySection() {
                 >
                   <img
                     src={filteredItems[lightboxIndex].src}
-                    alt={filteredItems[lightboxIndex].title}
+                    alt={t(filteredItems[lightboxIndex].title)}
                     className="w-full h-full max-h-[65vh] md:max-h-[70vh] object-contain"
                     referrerPolicy="no-referrer"
                   />
@@ -296,12 +298,12 @@ export default function GallerySection() {
               {/* Footer info in lightbox */}
               <div className="w-full text-center text-slate-300 max-w-xl mx-auto space-y-2 pt-4">
                 <p className="text-xs md:text-sm font-medium leading-relaxed">
-                  {filteredItems[lightboxIndex].description}
+                  {t(filteredItems[lightboxIndex].description)}
                 </p>
                 <div className="inline-flex items-center gap-1 bg-white/5 border border-white/10 px-3 py-1 rounded-full text-[10px] font-bold text-slate-400">
-                  <span>Photo {lightboxIndex + 1} of {filteredItems.length}</span>
+                  <span>{t("Photo")} {lightboxIndex + 1} {t("of")} {filteredItems.length}</span>
                   <span>•</span>
-                  <span className="uppercase text-emerald-400 font-extrabold tracking-wider">{filteredItems[lightboxIndex].categoryLabel}</span>
+                  <span className="uppercase text-emerald-400 font-extrabold tracking-wider">{t(filteredItems[lightboxIndex].categoryLabel)}</span>
                 </div>
               </div>
 

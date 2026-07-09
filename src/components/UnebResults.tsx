@@ -3,6 +3,7 @@ import {
   Search, Award, Download, FileText, ChevronUp, ChevronDown, 
   Sparkles, CheckCircle2, Phone, Calendar, MapPin, Printer
 } from "lucide-react";
+import { useLanguage } from "../LanguageContext";
 
 interface ResultRow {
   indexNo: string;
@@ -51,6 +52,7 @@ const UNEB_2020_DATA: ResultRow[] = [
 ];
 
 export default function UnebResults() {
+  const { t } = useLanguage();
   const [searchTerm, setSearchTerm] = useState("");
   const [sexFilter, setSexFilter] = useState<"ALL" | "M" | "F">("ALL");
   const [sortField, setSortField] = useState<"points" | "name" | "indexNo">("points");
@@ -112,19 +114,19 @@ export default function UnebResults() {
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4" id="results-summary-cards">
         <div className="bg-emerald-50/50 border border-emerald-100 rounded-xl p-3.5 text-center shadow-xs">
           <span className="block text-2xl font-black text-emerald-800 font-serif">100%</span>
-          <span className="text-[10px] font-bold text-emerald-700 uppercase tracking-wider">Pass Rate</span>
+          <span className="text-[10px] font-bold text-emerald-700 uppercase tracking-wider">{t("Pass Rate")}</span>
         </div>
         <div className="bg-sky-50/50 border border-sky-100 rounded-xl p-3.5 text-center shadow-xs">
           <span className="block text-2xl font-black text-sky-800 font-serif">{totals.highRange}</span>
-          <span className="text-[10px] font-bold text-sky-700 uppercase tracking-wider">15 - 20 Points</span>
+          <span className="text-[10px] font-bold text-sky-700 uppercase tracking-wider">{t("15 - 20 Points")}</span>
         </div>
         <div className="bg-indigo-50/50 border border-indigo-100 rounded-xl p-3.5 text-center shadow-xs">
           <span className="block text-2xl font-black text-indigo-800 font-serif">{totals.midRange}</span>
-          <span className="text-[10px] font-bold text-indigo-700 uppercase tracking-wider">10 - 14 Points</span>
+          <span className="text-[10px] font-bold text-indigo-700 uppercase tracking-wider">{t("10 - 14 Points")}</span>
         </div>
         <div className="bg-purple-50/50 border border-purple-100 rounded-xl p-3.5 text-center shadow-xs">
           <span className="block text-2xl font-black text-purple-800 font-serif">{totals.lowRange}</span>
-          <span className="text-[10px] font-bold text-purple-700 uppercase tracking-wider">04 - 09 Points</span>
+          <span className="text-[10px] font-bold text-purple-700 uppercase tracking-wider">{t("04 - 09 Points")}</span>
         </div>
       </div>
 
@@ -135,7 +137,7 @@ export default function UnebResults() {
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
           <input
             type="text"
-            placeholder="Search candidate name or scores..."
+            placeholder={t("Search candidate name or scores...")}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="w-full pl-9 pr-4 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-hidden focus:ring-1 focus:ring-emerald-700 focus:border-emerald-700 font-medium text-slate-800"
@@ -154,7 +156,7 @@ export default function UnebResults() {
                   : "bg-white hover:bg-slate-100 text-slate-700 border border-slate-200"
               }`}
             >
-              {gender === "ALL" ? "All Students" : gender === "M" ? "Boys" : "Girls"}
+              {gender === "ALL" ? t("All Students") : gender === "M" ? t("Boys") : t("Girls")}
             </button>
           ))}
         </div>
@@ -191,20 +193,20 @@ export default function UnebResults() {
             </svg>
             <div className="text-center">
               <h1 className="text-xl md:text-2xl font-black tracking-widest text-[#062449] uppercase">
-                ST. JOHN'S COLLEGE MPIGI
+                {t("ST. JOHN'S COLLEGE MPIGI")}
               </h1>
               <p className="text-sm font-bold tracking-wider text-sky-800 uppercase mt-0.5">
-                2020 UACE RESULTS
+                {t("2020 UACE RESULTS")}
               </p>
             </div>
           </div>
 
           <div className="text-[11px] font-extrabold text-sky-900/80 leading-relaxed max-w-lg mx-auto">
             <div className="border border-sky-900/30 px-3 py-1 bg-white/50 rounded inline-block">
-              S.1 & S.5 ADMISSIONS ARE ONGOING.
+              {t("S.1 & S.5 ADMISSIONS ARE ONGOING.")}
             </div>
             <div className="mt-1.5 flex flex-wrap justify-center gap-x-3 text-[10px]">
-              <span>CONTACT US ON: 0772 555 664</span>
+              <span>{t("CONTACT US ON:")} 0772 555 664</span>
               <span>/</span>
               <span>0702 297 171</span>
               <span>/</span>
@@ -225,27 +227,27 @@ export default function UnebResults() {
                   className="p-2 border-r border-sky-900/30 cursor-pointer hover:bg-sky-950 transition-colors"
                 >
                   <div className="flex items-center gap-1">
-                    <span>INDEX NO</span>
+                    <span>{t("INDEX NO")}</span>
                     {sortField === "indexNo" && (sortDirection === "desc" ? <ChevronDown className="h-3 w-3" /> : <ChevronUp className="h-3 w-3" />)}
                   </div>
                 </th>
-                <th className="p-2 border-r border-sky-900/30 text-center">SEX</th>
+                <th className="p-2 border-r border-sky-900/30 text-center">{t("SEX")}</th>
                 <th 
                   onClick={() => handleSort("name")}
                   className="p-2 border-r border-sky-900/30 cursor-pointer hover:bg-sky-950 transition-colors"
                 >
                   <div className="flex items-center gap-1">
-                    <span>STUDENT'S NAME</span>
+                    <span>{t("STUDENT'S NAME")}</span>
                     {sortField === "name" && (sortDirection === "desc" ? <ChevronDown className="h-3 w-3" /> : <ChevronUp className="h-3 w-3" />)}
                   </div>
                 </th>
-                <th className="p-2 border-r border-sky-900/30">SCORE</th>
+                <th className="p-2 border-r border-sky-900/30">{t("SCORE")}</th>
                 <th 
                   onClick={() => handleSort("points")}
                   className="p-2 text-center cursor-pointer hover:bg-sky-950 transition-colors"
                 >
                   <div className="flex items-center justify-center gap-1">
-                    <span>POINTS</span>
+                    <span>{t("POINTS")}</span>
                     {sortField === "points" && (sortDirection === "desc" ? <ChevronDown className="h-3 w-3" /> : <ChevronUp className="h-3 w-3" />)}
                   </div>
                 </th>
@@ -255,7 +257,7 @@ export default function UnebResults() {
               {filteredData.length === 0 ? (
                 <tr>
                   <td colSpan={5} className="p-8 text-center text-sky-800/60 font-semibold italic">
-                    No student results match your search parameters.
+                    {t("No student results match your search parameters.")}
                   </td>
                 </tr>
               ) : (
@@ -301,7 +303,7 @@ export default function UnebResults() {
         {/* Paper Congratulations Footer */}
         <div className="mt-6 pt-4 border-t-2 border-dashed border-sky-900/30 space-y-4">
           <p className="text-xs font-bold leading-relaxed text-slate-800 italic text-center max-w-2xl mx-auto">
-            "We congratulate the Directors, teachers, students and parents for their tireless effort towards this success."
+            {t('"We congratulate the Directors, teachers, students and parents for their tireless effort towards this success."')}
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2 items-end">
@@ -316,26 +318,26 @@ export default function UnebResults() {
               >
                 {/* stamp text top */}
                 <span className="text-[8px] font-black tracking-wider text-sky-700 uppercase absolute top-5">
-                  ST. JOHN'S COLLEGE
+                  {t("ST. JOHN'S COLLEGE")}
                 </span>
                 
                 {/* Stamp date */}
                 <div className="border-t border-b border-sky-700/60 py-1 px-2 my-1 text-center">
-                  <span className="block text-[11px] font-black text-sky-800">21 AUG 2021</span>
-                  <span className="block text-[8px] font-bold text-sky-600 uppercase tracking-widest">DIRECTOR</span>
+                  <span className="block text-[11px] font-black text-sky-800">{t("21 AUG 2021")}</span>
+                  <span className="block text-[8px] font-bold text-sky-600 uppercase tracking-widest">{t("DIRECTOR")}</span>
                 </div>
 
                 {/* stamp text bottom */}
                 <span className="text-[8px] font-black tracking-wider text-sky-700 uppercase absolute bottom-5">
-                  P.O. BOX 14078, MPIGI
+                  {t("P.O. BOX 14078, MPIGI")}
                 </span>
               </div>
 
               {/* Motto quote */}
               <div className="pl-2">
-                <span className="text-xs font-bold text-sky-900 uppercase block">SCHOOL MOTTO:</span>
+                <span className="text-xs font-bold text-sky-900 uppercase block">{t("SCHOOL MOTTO:")}</span>
                 <p className="text-xs font-black italic text-sky-700 mt-0.5">
-                  "Godliness & Hardwork"
+                  {t('"Godliness & Hardwork"')}
                 </p>
               </div>
 
@@ -347,19 +349,19 @@ export default function UnebResults() {
               {/* Point Range Summary List */}
               <div className="border border-sky-900/20 bg-white/60 p-4 rounded-xl text-xs space-y-1 w-full max-w-xs shadow-xs">
                 <span className="font-extrabold uppercase text-sky-900 block border-b border-sky-900/20 pb-1 mb-1">
-                  Summary Statistics:
+                  {t("Summary Statistics:")}
                 </span>
                 <div className="flex justify-between font-bold text-slate-800">
-                  <span>1. 15 - 20 Points</span>
-                  <span>= 12 Students</span>
+                  <span>{t("1. 15 - 20 Points")}</span>
+                  <span>{t("= 12 Students")}</span>
                 </div>
                 <div className="flex justify-between font-bold text-slate-800">
-                  <span>2. 10 - 14 Points</span>
-                  <span>= 12 Students</span>
+                  <span>{t("2. 10 - 14 Points")}</span>
+                  <span>{t("= 12 Students")}</span>
                 </div>
                 <div className="flex justify-between font-bold text-slate-800">
-                  <span>3. 04 - 09 Points</span>
-                  <span>= 11 Students</span>
+                  <span>{t("3. 04 - 09 Points")}</span>
+                  <span>{t("= 11 Students")}</span>
                 </div>
               </div>
 
@@ -383,10 +385,10 @@ export default function UnebResults() {
                   </svg>
                 </div>
                 <span className="block font-black text-[#062449] text-xs uppercase tracking-wider">
-                  MR. MUGISHA ELIAS
+                  {t("MR. MUGISHA ELIAS")}
                 </span>
                 <span className="block text-[10px] font-bold text-sky-800 uppercase tracking-widest mt-0.5">
-                  DIRECTOR.
+                  {t("DIRECTOR.")}
                 </span>
               </div>
 

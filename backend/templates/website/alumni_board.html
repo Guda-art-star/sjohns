@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}SJC Alumni Memory & Registry Board{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+
+    <!-- Header banner -->
+    <div class="p-5 bg-sky-950 text-white rounded-4 shadow-sm mb-5 text-center">
+        <i class="bi bi-mortarboard-fill text-warning" style="font-size: 48px;"></i>
+        <h1 class="display-6 mt-2 mb-2 font-serif text-white">SJC Alumni Registry & Memory Board</h1>
+        <p class="lead text-white-50 max-w-2xl mx-auto text-xs small">
+            Connecting generations of graduates of St. John's College Mpigi. Share your career profile and precious memories of SJC days.
+        </p>
+    </div>
+
+    <div class="row g-5">
+        
+        <!-- Registration Form Column -->
+        <div class="col-lg-4">
+            <div class="p-4 bg-white rounded-4 border shadow-xs position-sticky" style="top: 100px;">
+                <h4 class="text-sky-950 mb-3 border-bottom pb-2">Join SJC Alumni Board</h4>
+                <p class="text-xs text-muted mb-4">
+                    Fill out the form below to register your graduation. All submissions go through brief administrator moderation.
+                </p>
+
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <button type="submit" class="btn btn-sky-custom w-100 py-2.5 rounded-3 text-uppercase font-bold mt-3" style="font-size: 11px;">
+                        Submit Profile for Verification
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Alumni List Board Column -->
+        <div class="col-lg-8">
+            <h3 class="text-sky-950 mb-4 border-bottom pb-2">SJC Alumni Hall of Fame</h3>
+            
+            {% if alumni_list %}
+                <div class="row g-4">
+                    {% for person in alumni_list %}
+                        <div class="col-md-6">
+                            <div class="card h-100 card-custom border-0 shadow-xs overflow-hidden bg-white p-4">
+                                <div class="d-flex gap-3 align-items-start mb-3">
+                                    {% if person.photo %}
+                                        <img src="{{ person.photo.url }}" class="rounded-circle border border-warning border-2" style="width: 60px; height: 60px; object-fit: cover;" alt="{{ person.name }}">
+                                    {% else %}
+                                        <div class="bg-sky-50 text-sky-custom rounded-circle border border-sky-100 d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+                                            <i class="bi bi-person-fill fs-3"></i>
+                                        </div>
+                                    {% endif %}
+                                    <div>
+                                        <h5 class="text-slate-800 mb-0 font-bold" style="font-size: 15px;">{{ person.name }}</h5>
+                                        <span class="badge bg-warning-subtle text-warning-emphasis uppercase" style="font-size: 9px;">Class of {{ person.graduation_year }}</span>
+                                        {% if person.current_profession %}
+                                            <p class="text-xs text-muted mb-0 mt-1"><i class="bi bi-briefcase"></i> {{ person.current_profession }}</p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                
+                                {% if person.quote %}
+                                    <div class="p-3 bg-light rounded-3 italic text-muted small mb-3 border-start border-warning border-3" style="font-size: 11px;">
+                                        "{{ person.quote }}"
+                                    </div>
+                                {% endif %}
+
+                                {% if person.memory_text %}
+                                    <p class="text-muted small mb-0 leading-relaxed text-truncate-3" style="font-size: 11px;">
+                                        {{ person.memory_text }}
+                                    </p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="text-center p-5 bg-white border rounded-4 text-muted small">
+                    <i class="bi bi-journal-richtext fs-1 text-slate-300"></i>
+                    <p class="mt-2">No moderated alumni records are published yet on SQLite tables.</p>
+                </div>
+            {% endif %}
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

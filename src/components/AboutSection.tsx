@@ -4,6 +4,7 @@ import {
   Users, Award, Calendar, Home, ArrowRight, X, 
   Sparkles, ShieldCheck, Heart, Flag 
 } from "lucide-react";
+import { useLanguage } from "../LanguageContext";
 
 // Image generated earlier
 import gateEntrance from "../assets/images/school_gate_entrance_1782462446101.jpg";
@@ -14,12 +15,13 @@ interface AboutSectionProps {
 
 export default function AboutSection({ onOpenAdmission }: AboutSectionProps) {
   const [showFullHistory, setShowFullHistory] = useState(false);
+  const { t } = useLanguage();
 
   const stats = [
-    { value: "300+", label: "Students", icon: Users, desc: "Diverse student body" },
-    { value: "25+", label: "Qualified Teachers", icon: Award, desc: "Dedicated educators" },
-    { value: "20+", label: "Years of Excellence", icon: Calendar, desc: "Built on hard work" },
-    { value: "100%", label: "Boarding School", icon: Home, desc: "Safe residential halls" }
+    { value: "300+", label: t("Students"), icon: Users, desc: t("Diverse student body") },
+    { value: "25+", label: t("Qualified Teachers"), icon: Award, desc: t("Dedicated educators") },
+    { value: "6+", label: t("Years of Excellence"), icon: Calendar, desc: t("Built on hard work") },
+    { value: "100%", label: t("Boarding School"), icon: Home, desc: t("Safe residential halls") }
   ];
 
   return (
@@ -53,13 +55,13 @@ export default function AboutSection({ onOpenAdmission }: AboutSectionProps) {
           <div className="lg:col-span-7 space-y-6 md:space-y-8">
             <div className="space-y-3">
               <span className="inline-block px-3 py-1 bg-emerald-100 text-emerald-800 text-xs font-black tracking-widest rounded-full uppercase">
-                About Us
+                {t("About Us")}
               </span>
               <h2 className="font-serif text-3xl md:text-4xl font-black text-slate-900 leading-tight">
-                St. John's College Mpigi.
+                {t("St. John's College Mpigi")}
               </h2>
               <p className="text-xs md:text-sm text-slate-600 leading-relaxed font-medium">
-                St. John's College Mpigi is a leading secondary school committed to providing quality education that empowers students to excel academically, spiritually, and socially. We nurture future leaders with integrity, innovation, and a strong sense of purpose.
+                {t("Operating under Mugisha Elias Ndemire since 2020, St. John's College Mpigi is a leading secondary school committed to providing quality education that empowers students to excel academically, spiritually, and socially. We nurture future leaders with integrity, innovation, and a strong sense of purpose.")}
               </p>
             </div>
 
@@ -92,7 +94,7 @@ export default function AboutSection({ onOpenAdmission }: AboutSectionProps) {
                 onClick={() => setShowFullHistory(true)}
                 className="px-6 py-3 bg-emerald-800 hover:bg-emerald-900 text-white text-xs font-bold rounded-lg shadow-md hover:shadow-lg flex items-center gap-1.5 transition-all uppercase tracking-wider cursor-pointer"
               >
-                <span>Read More About St. John's</span>
+                <span>{t("Read More About St. John's")}</span>
                 <ArrowRight className="h-4 w-4" />
               </button>
             </div>
@@ -120,11 +122,11 @@ export default function AboutSection({ onOpenAdmission }: AboutSectionProps) {
               </button>
 
               <div className="border-b border-slate-100 pb-4 mb-6">
-                <span className="text-[10px] font-black text-emerald-800 tracking-wider uppercase">Institutional Profile</span>
+                <span className="text-[10px] font-black text-emerald-800 tracking-wider uppercase">{t("Institutional Profile")}</span>
                 <h3 className="font-serif text-2xl font-black text-slate-900 mt-1 leading-none">
-                  St. John's College Mpigi
+                  {t("St. John's College Mpigi")}
                 </h3>
-                <p className="text-[11px] text-slate-400 mt-1 italic">"Godliness & Hardwork"</p>
+                <p className="text-[11px] text-slate-400 mt-1 italic">"{t("Godliness & Hardwork")}"</p>
               </div>
 
               {/* Mission, Vision, and Values Block */}
@@ -133,48 +135,51 @@ export default function AboutSection({ onOpenAdmission }: AboutSectionProps) {
                   <div className="p-4 bg-emerald-50/50 rounded-xl border border-emerald-100/50 space-y-1.5">
                     <div className="flex items-center gap-2 text-emerald-800 font-bold uppercase tracking-wider text-[10px]">
                       <Flag className="h-4 w-4" />
-                      <span>Our Mission</span>
+                      <span>{t("Our Mission")}</span>
                     </div>
                     <p className="text-slate-600">
-                      To provide quality, inclusive secondary education that equips students with outstanding academic knowledge, moral integrity, and practical skills for global leadership.
+                      {t("To provide quality, inclusive secondary education that equips students with outstanding academic knowledge, moral integrity, and practical skills for global leadership.")}
                     </p>
                   </div>
                   <div className="p-4 bg-rose-50/50 rounded-xl border border-rose-100/50 space-y-1.5">
                     <div className="flex items-center gap-2 text-rose-800 font-bold uppercase tracking-wider text-[10px]">
                       <Sparkles className="h-4 w-4" />
-                      <span>Our Vision</span>
+                      <span>{t("Our Vision")}</span>
                     </div>
                     <p className="text-slate-600">
-                      To be a premier center of holistic academic excellence and character-building in East Africa, producing highly competent, godly, and innovative citizens.
+                      {t("To be a premier center of holistic academic excellence and character-building in East Africa, producing highly competent, godly, and innovative citizens.")}
                     </p>
                   </div>
                 </div>
 
                 <div className="space-y-3">
                   <h4 className="font-serif text-sm font-bold text-slate-900 border-b border-slate-100 pb-1">
-                    Our Historic Journey & Foundations
+                    {t("Our Historic Journey & Foundations")}
                   </h4>
                   <p>
-                    Established over two decades ago, St. John's College Mpigi was founded on a deep spiritual conviction that true knowledge must go hand in hand with discipline, self-reliance, and outstanding moral integrity. 
+                    {t("Established over two decades ago, St. John's College Mpigi was founded on a deep spiritual conviction that true knowledge must go hand in hand with discipline, self-reliance, and outstanding moral integrity.")}
                   </p>
                   <p>
-                    From humble beginnings, the college has grown into a highly recognized private boarding school under UNEB, serving hundreds of bright boys and girls from all parts of Uganda and neighboring countries. The serene environment offers a sanctuary for rigorous, uninterrupted learning away from city distractions.
+                    {t("Since 2020, the school has been operating under the visionary leadership of <strong>Mugisha Elias Ndemire</strong>. Under his stewardship, the college has undergone significant modern upgrades, enhancing academic rigor, computer and science laboratories, campus security, and student residential facilities.")}
                   </p>
                   <p>
-                    Today, the school boasts excellent dormitories, multi-purpose assembly halls, fully equipped biology/chemistry/physics laboratories, and standard playfields. We maintain high discipline and academic standards, which is why our candidates continuously score top Division One marks in both UCE and UACE examinations.
+                    {t("From humble beginnings, the college has grown into a highly recognized private boarding school under UNEB, serving hundreds of bright boys and girls from all parts of Uganda and neighboring countries. The serene environment offers a sanctuary for rigorous, uninterrupted learning away from city distractions.")}
+                  </p>
+                  <p>
+                    {t("Today, the school boasts excellent dormitories, multi-purpose assembly halls, fully equipped biology/chemistry/physics laboratories, and standard playfields. We maintain high discipline and academic standards, which is why our candidates continuously score top Division One marks in both UCE and UACE examinations.")}
                   </p>
                 </div>
 
                 <div className="p-4 bg-slate-50 rounded-xl space-y-2 border border-slate-200/60">
                   <h4 className="font-serif text-sm font-bold text-slate-900 flex items-center gap-1.5">
                     <ShieldCheck className="h-4 w-4 text-emerald-700" />
-                    <span>School Core Values</span>
+                    <span>{t("School Core Values")}</span>
                   </h4>
                   <div className="grid grid-cols-2 gap-2 text-[11px] font-semibold text-slate-800">
-                    <div>✔ Academic Rigor & Merit</div>
-                    <div>✔ God-Centered Ethics</div>
-                    <div>✔ Strict Self-Discipline</div>
-                    <div>✔ Innovative Practice</div>
+                    <div>✔ {t("Academic Rigor & Merit")}</div>
+                    <div>✔ {t("God-Centered Ethics")}</div>
+                    <div>✔ {t("Strict Self-Discipline")}</div>
+                    <div>✔ {t("Innovative Practice")}</div>
                     <div>✔ Mutual Respect</div>
                     <div>✔ Personal Integrity</div>
                   </div>

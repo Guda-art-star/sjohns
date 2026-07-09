@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Award, ShieldAlert, Sparkles, BookOpen, Heart, Trophy, X } from "lucide-react";
+import { useLanguage } from "../LanguageContext";
 
 export default function KeyPillars() {
+  const { t } = useLanguage();
   const [selectedPillar, setSelectedPillar] = useState<{
     title: string;
     description: string;
@@ -13,39 +15,39 @@ export default function KeyPillars() {
 
   const pillars = [
     {
-      title: "Academic Excellence",
-      description: "Top performance in academics and beyond.",
+      title: t("Academic Excellence"),
+      description: t("Top performance in academics and beyond."),
       icon: BookOpen,
       color: "bg-emerald-800 text-emerald-100",
       details: [
-        "Highly-qualified and dedicated teachers providing personalized attention.",
-        "Equipped state-of-the-art laboratory facilities for Science and ICT practicals.",
-        "UNEB national examination center with consistent Division 1 records.",
-        "Weekly evaluation tests, discussion groups, and career guidance seminars."
+        t("Highly-qualified and dedicated teachers providing personalized attention."),
+        t("Equipped state-of-the-art laboratory facilities for Science and ICT practicals."),
+        t("UNEB national examination center with consistent Division 1 records."),
+        t("Weekly evaluation tests, discussion groups, and career guidance seminars.")
       ]
     },
     {
-      title: "Discipline & Integrity",
-      description: "Building character for lifelong success.",
+      title: t("Discipline & Integrity"),
+      description: t("Building character for lifelong success."),
       icon: Heart,
       color: "bg-rose-700 text-rose-100",
       details: [
-        "Strong focus on moral uprightness, respect, and spiritual growth.",
-        "Consistent mentoring programs to cultivate high personal standards.",
-        "Safe, well-governed, and distraction-free boarding environment.",
-        "Partnership with parents to nurture well-behaved, responsible leaders."
+        t("Strong focus on moral uprightness, respect, and spiritual growth."),
+        t("Consistent mentoring programs to cultivate high personal standards."),
+        t("Safe, well-governed, and distraction-free boarding environment."),
+        t("Partnership with parents to nurture well-behaved, responsible leaders.")
       ]
     },
     {
-      title: "Holistic Development",
-      description: "Nurturing talents and leadership.",
+      title: t("Holistic Development"),
+      description: t("Nurturing talents and leadership."),
       icon: Trophy,
       color: "bg-amber-600 text-amber-100",
       details: [
-        "Vibrant clubs including Debating Society, Science Club, Drama and Music.",
-        "Competitive sports leagues in football, basketball, netball, and athletics.",
-        "Student leadership bodies and prefect councils cultivating governance skills.",
-        "Community outreach programs to instill civic duty and global empathy."
+        t("Vibrant clubs including Debating Society, Science Club, Drama and Music."),
+        t("Competitive sports leagues in football, basketball, netball, and athletics."),
+        t("Student leadership bodies and prefect councils cultivating governance skills."),
+        t("Community outreach programs to instill civic duty and global empathy.")
       ]
     }
   ];
@@ -72,7 +74,7 @@ export default function KeyPillars() {
                 <h3 className="font-serif text-lg font-bold text-slate-800">{pillar.title}</h3>
                 <p className="text-xs text-slate-500 font-medium leading-relaxed">{pillar.description}</p>
                 <span className="inline-flex items-center text-[10px] font-bold text-emerald-800 hover:underline mt-1.5 uppercase tracking-wider">
-                  Read Core values →
+                  {t("Read Core values →")}
                 </span>
               </div>
             </motion.div>
@@ -103,7 +105,7 @@ export default function KeyPillars() {
                   <selectedPillar.icon className="h-6 w-6" />
                 </div>
                 <div>
-                  <span className="text-[10px] font-black text-emerald-800 tracking-wider uppercase">Our Pillars</span>
+                  <span className="text-[10px] font-black text-emerald-800 tracking-wider uppercase">{t("Our Pillars")}</span>
                   <h4 className="font-serif text-xl font-bold text-slate-900 leading-none mt-1">
                     {selectedPillar.title}
                   </h4>
@@ -111,7 +113,7 @@ export default function KeyPillars() {
               </div>
 
               <p className="text-xs text-slate-600 font-medium leading-relaxed mb-4">
-                Here is how St. John's College Mpigi implements and guarantees this foundational pillar of education:
+                {t("Here is how St. John's College Mpigi implements and guarantees this foundational pillar of education:")}
               </p>
 
               <ul className="space-y-3">
@@ -127,7 +129,7 @@ export default function KeyPillars() {
                 onClick={() => setSelectedPillar(null)}
                 className="mt-6 w-full py-2 bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold rounded-lg transition-colors text-center"
               >
-                Okay, I understand
+                {t("Okay, I understand")}
               </button>
             </motion.div>
           </div>
