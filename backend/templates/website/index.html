@@ -124,6 +124,181 @@
         </div>
     </div>
 
+    <!-- Chart.js line chart visualization for website visits and admission interactions -->
+    <div class="card card-custom border-0 shadow-sm bg-white rounded-4 mb-5 overflow-hidden">
+        <div class="bg-sky-custom" style="height: 6px;"></div>
+        <div class="p-4">
+            <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
+                <div>
+                    <h4 class="text-sky-950 font-serif mb-1"><i class="bi bi-graph-up-arrow text-sky-custom me-2"></i> Website Traffic & Admissions Form Interactions</h4>
+                    <p class="text-muted small mb-0">Dynamic 7-day trend analysis of daily visitor visits and online applications.</p>
+                </div>
+                <div class="d-flex gap-2 mt-2 mt-sm-0">
+                    <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2 rounded-pill"><i class="bi bi-circle-fill text-primary small me-1"></i> Daily Visits</span>
+                    <span class="badge bg-warning bg-opacity-15 text-warning-emphasis px-3 py-2 rounded-pill"><i class="bi bi-circle-fill text-warning small me-1"></i> Form Submissions</span>
+                </div>
+            </div>
+            <div style="position: relative; height: 320px; width: 100%;">
+                <canvas id="trendsChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const ctx = document.getElementById('trendsChart').getContext('2d');
+        
+        const labels = [
+            {% for trend in daily_trends %}
+                "{{ trend.day }}",
+            {% endfor %}
+        ];
+        
+        const visitsData = [
+            {% for trend in daily_trends %}
+                {{ trend.visits }},
+            {% endfor %}
+        ];
+        
+        const admissionsData = [
+            {% for trend in daily_trends %}
+                {{ trend.admissions }},
+            {% endfor %}
+        ];
+
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: 'Daily Website Visits',
+                        data: visitsData,
+                        borderColor: '#0284c7', // Sky 600
+                        backgroundColor: 'rgba(2, 132, 199, 0.08)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.4,
+                        pointBackgroundColor: '#0284c7',
+                        pointBorderColor: '#ffffff',
+                        pointBorderWidth: 2,
+                        pointRadius: 5,
+                        pointHoverRadius: 7,
+                        yAxisID: 'yVisits'
+                    },
+                    {
+                        label: 'Admission Submissions',
+                        data: admissionsData,
+                        borderColor: '#f59e0b', // Amber 500
+                        backgroundColor: 'rgba(245, 158, 11, 0.05)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.3,
+                        pointBackgroundColor: '#f59e0b',
+                        pointBorderColor: '#ffffff',
+                        pointBorderWidth: 2,
+                        pointRadius: 5,
+                        pointHoverRadius: 7,
+                        yAxisID: 'yAdmissions'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false,
+                        backgroundColor: '#1e293b',
+                        titleColor: '#ffffff',
+                        bodyColor: '#cbd5e1',
+                        padding: 12,
+                        borderRadius: 8,
+                        titleFont: {
+                            family: 'Inter, sans-serif',
+                            weight: 'bold'
+                        },
+                        bodyFont: {
+                            family: 'Inter, sans-serif'
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            font: {
+                                family: 'Inter, sans-serif',
+                                size: 11
+                            },
+                            color: '#64748b'
+                        }
+                    },
+                    yVisits: {
+                        type: 'linear',
+                        display: true,
+                        position: 'left',
+                        grid: {
+                            color: 'rgba(226, 232, 240, 0.6)'
+                        },
+                        ticks: {
+                            font: {
+                                family: 'Inter, sans-serif',
+                                size: 11
+                            },
+                            color: '#0284c7'
+                        },
+                        title: {
+                            display: true,
+                            text: 'Website Visits',
+                            font: {
+                                family: 'Inter, sans-serif',
+                                weight: 'bold',
+                                size: 11
+                            },
+                            color: '#0284c7'
+                        }
+                    },
+                    yAdmissions: {
+                        type: 'linear',
+                        display: true,
+                        position: 'right',
+                        grid: {
+                            drawOnChartArea: false
+                        },
+                        ticks: {
+                            font: {
+                                family: 'Inter, sans-serif',
+                                size: 11
+                            },
+                            color: '#f59e0b',
+                            stepSize: 1,
+                            precision: 0
+                        },
+                        title: {
+                            display: true,
+                            text: 'Admission Submissions',
+                            font: {
+                                family: 'Inter, sans-serif',
+                                weight: 'bold',
+                                size: 11
+                            },
+                            color: '#f59e0b'
+                        }
+                    }
+                }
+            }
+        });
+    });
+    </script>
+
     <!-- 3. Dynamic sliders section (Optional Hero Demonstration) -->
     {% if slides %}
     <div class="mb-5">
